@@ -2,6 +2,7 @@ package com.jimueller.fof.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.jimueller.fof.api.Club;
+import com.jimueller.fof.api.Member;
 import com.jimueller.fof.jdbi.ClubDAO;
 
 import javax.ws.rs.GET;
@@ -26,36 +27,17 @@ public class ClubResource {
         return  dao.listClubs();
     }
 
-    @Path("/club/{id}")
+    @Path("/{id}")
     @GET
     @Timed
     public Club getClubById(@PathParam("id") int id){
         return dao.getClubById(id);
     }
-}
 
-/*
-
-@Path("/bookings")
-public class BookingResource {
-    private BookingDao dao;
-
-    public BookingResource(BookingDao dao) {
-        this.dao = dao;
-    }
-
+    @Path("/{id}/members")
     @GET
     @Timed
-    public List<Booking> getAllBookings() {
-        return dao.fetchAllBookings();
-    }
-
-    @Path("/booking/{id}")
-    @GET
-    @Timed
-    public Booking getBookingById(@PathParam("id") int id) {
-        return dao.getBookingById(id);
+    public List<Member> getClubMembers(@PathParam("id") int id){
+        return dao.getClubMembers(id);
     }
 }
-
- */

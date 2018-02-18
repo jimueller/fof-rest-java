@@ -1,10 +1,11 @@
 package com.jimueller.fof.api;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Member {
 
@@ -16,9 +17,9 @@ public class Member {
     private String firstName;
     @JsonProperty
     private String middleInitial;
-    //FIXME need a normal date format
     @JsonProperty
-    private java.sql.Date dob;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dob;
     @JsonProperty
     private String gender;
     @JsonProperty
@@ -30,7 +31,8 @@ public class Member {
     @JsonProperty
     private String zipCode;
     @JsonProperty
-    private java.sql.Date expDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate expDate;
     @JsonProperty
     private long ageGroupId;
     @JsonProperty
@@ -39,7 +41,9 @@ public class Member {
     public Member() {
     }
 
-    public Member(String lastName, String firstName, String middleInitial, Date dob, String gender, String streetAddr, String city, String state, String zipCode, Date expDate, long ageGroupId, long clubId) {
+    public Member(String lastName, String firstName, String middleInitial, LocalDate dob, String gender,
+                  String streetAddr, String city, String state, String zipCode, LocalDate expDate, long ageGroupId,
+                  long clubId) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
@@ -54,7 +58,9 @@ public class Member {
         this.clubId = clubId;
     }
 
-    public Member(long memId, String lastName, String firstName, String middleInitial, Date dob, String gender, String streetAddr, String city, String state, String zipCode, Date expDate, long ageGroupId, long clubId) {
+    public Member(long memId, String lastName, String firstName, String middleInitial, LocalDate dob, String gender,
+                  String streetAddr, String city, String state, String zipCode, LocalDate expDate, long ageGroupId,
+                  long clubId) {
         this.memId = memId;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -106,11 +112,11 @@ public class Member {
     }
 
 
-    public java.sql.Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(java.sql.Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -160,11 +166,11 @@ public class Member {
     }
 
 
-    public java.sql.Date getExpDate() {
+    public LocalDate getExpDate() {
         return expDate;
     }
 
-    public void setExpDate(java.sql.Date expDate) {
+    public void setExpDate(LocalDate expDate) {
         this.expDate = expDate;
     }
 

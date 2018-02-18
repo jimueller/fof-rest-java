@@ -131,6 +131,9 @@ hs_err_pid*
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 
+# Rest Client responses
+.idea/httpRequests
+
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries

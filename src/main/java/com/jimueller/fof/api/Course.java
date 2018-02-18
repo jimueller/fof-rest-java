@@ -9,9 +9,9 @@ public class Course {
     @JsonProperty
     private long courseId;
     @JsonProperty
-    private String lengthKm;
+    private double lengthKm;
     @JsonProperty
-    private String climbM;
+    private double climbInMeters;
     @JsonProperty
     private long numControls;
     @JsonProperty
@@ -20,17 +20,17 @@ public class Course {
     public Course() {
     }
 
-    public Course(String lengthKm, String climbM, long numControls, long compId) {
+    public Course(double lengthKm, double climbInMeters, long numControls, long compId) {
         this.lengthKm = lengthKm;
-        this.climbM = climbM;
+        this.climbInMeters = climbInMeters;
         this.numControls = numControls;
         this.compId = compId;
     }
 
-    public Course(long courseId, String lengthKm, String climbM, long numControls, long compId) {
+    public Course(long courseId, double lengthKm, double climbInMeters, long numControls, long compId) {
         this.courseId = courseId;
         this.lengthKm = lengthKm;
-        this.climbM = climbM;
+        this.climbInMeters = climbInMeters;
         this.numControls = numControls;
         this.compId = compId;
     }
@@ -44,21 +44,21 @@ public class Course {
     }
 
 
-    public String getLengthKm() {
+    public double getLengthKm() {
         return lengthKm;
     }
 
-    public void setLengthKm(String lengthKm) {
+    public void setLengthKm(double lengthKm) {
         this.lengthKm = lengthKm;
     }
 
 
-    public String getClimbM() {
-        return climbM;
+    public double getClimb() {
+        return climbInMeters;
     }
 
-    public void setClimbM(String climbM) {
-        this.climbM = climbM;
+    public void setClimb(double climbM) {
+        this.climbInMeters = climbInMeters;
     }
 
 
@@ -84,7 +84,7 @@ public class Course {
         return new ToStringBuilder(this)
                 .append("courseId", courseId)
                 .append("lengthKm", lengthKm)
-                .append("climbM", climbM)
+                .append("climbInMeters", climbInMeters)
                 .append("numControls", numControls)
                 .append("compId", compId)
                 .toString();
