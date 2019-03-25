@@ -6,7 +6,7 @@ database:
   user: ${DB_USER}
 
   # the password
-  password: ${DB_PWD}
+  password: ${DB_PASS}
 
   # the JDBC URL
   url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DS_NAME}
