@@ -5,12 +5,14 @@ import com.jimueller.fof.jdbi.MemberDAO;
 import com.jimueller.fof.resources.ClubResource;
 import com.jimueller.fof.resources.MemberResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.jdbi3.JdbiFactory;
 import io.dropwizard.jdbi3.bundles.JdbiExceptionsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import org.jdbi.v3.core.Jdbi;
 
 public class FofApplication extends Application<FofApplicationConfiguration> {
@@ -33,6 +35,9 @@ public class FofApplication extends Application<FofApplicationConfiguration> {
                 )
         );
 
+        // Server Swagger UI at path, see pom.xml for swagger-ui source
+        bootstrap.addBundle(new AssetsBundle("/swagger-ui", "/docs", "index.html"));
+
         bootstrap.addBundle(new JdbiExceptionsBundle());
         super.initialize(bootstrap);
     }
@@ -51,5 +56,8 @@ public class FofApplication extends Application<FofApplicationConfiguration> {
 
         final MemberResource memberResource = new MemberResource(memberDAO);
         environment.jersey().register(memberResource);
+
+        final OpenApiResource openApiResource = new OpenApiResource();
+        environment.jersey().register(openApiResource);
     }
 }

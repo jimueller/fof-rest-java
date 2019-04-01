@@ -3,6 +3,12 @@ package com.jimueller.fof.resources;
 import com.codahale.metrics.annotation.Timed;
 import com.jimueller.fof.api.Member;
 import com.jimueller.fof.jdbi.MemberDAO;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -22,6 +28,20 @@ public class MemberResource {
 
     @GET
     @Timed
+    @Operation(
+            description = "Get All Members",
+            responses = {
+                    @ApiResponse(
+                            description = "List of All Users",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(
+                                            implementation = Member.class
+                                    )
+                            )
+                    )
+            }
+    )
     public List<Member> fetchAllMembers(){
         return memberDAO.listMembers();
     }
@@ -29,7 +49,6 @@ public class MemberResource {
     @POST
     @Timed
     public Member addMember(@NotNull @Valid Member member){
-
         return member;
     }
 
