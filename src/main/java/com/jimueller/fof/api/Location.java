@@ -3,6 +3,9 @@ package com.jimueller.fof.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jdbi.v3.core.mapper.Nested;
+
+import java.util.StringJoiner;
 
 public class Location {
 
@@ -11,37 +14,21 @@ public class Location {
     @JsonProperty
     private String name;
     @JsonProperty
-    private String street;
-    @JsonProperty
-    private String city;
-    @JsonProperty
-    private String state;
-    @JsonProperty
-    private String postalCode;
-    @JsonProperty
-    private String postalCodeExt;
-
+    @Nested
+    private Address address;
 
     public Location() {
     }
 
-    public Location(String name, String street, String city, String state, String postalCode, String postalCodeExt) {
+    public Location(String name, Address address) {
         this.name = name;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-        this.postalCodeExt = postalCodeExt;
+        this.address = address;
     }
 
-    public Location(long locId, String name, String street, String city, String state, String postalCode, String postalCodeExt) {
+    public Location(long locId, String name, Address address) {
         this.locId = locId;
         this.name = name;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-        this.postalCodeExt = postalCodeExt;
+        this.address = address;
     }
 
     public long getLocId() {
@@ -61,61 +48,20 @@ public class Location {
         this.name = name;
     }
 
-
-    public String getStreet() {
-        return street;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-
-    public String getPostalCodeExt() {
-        return postalCodeExt;
-    }
-
-    public void setPostalCodeExt(String postalCodeExt) {
-        this.postalCodeExt = postalCodeExt;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("locId", locId)
-                .append("name", name)
-                .append("street", street)
-                .append("city", city)
-                .append("state", state)
-                .append("postalCode", postalCode)
-                .append("postalCodeExt", postalCodeExt)
+        return new StringJoiner(", ", Location.class.getSimpleName() + "[", "]")
+                .add("locId=" + locId)
+                .add("name='" + name + "'")
+                .add("address=" + address)
                 .toString();
     }
 }

@@ -4,14 +4,14 @@ package com.jimueller.fof.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Competition {
 
     @JsonProperty
     private long compId;
     @JsonProperty
-    private java.sql.Date date;
+    private LocalDate date;
     @JsonProperty
     private long locId;
     @JsonProperty
@@ -20,13 +20,13 @@ public class Competition {
     public Competition() {
     }
 
-    public Competition(Date date, long locId, long meetId) {
+    public Competition(LocalDate date, long locId, long meetId) {
         this.date = date;
         this.locId = locId;
         this.meetId = meetId;
     }
 
-    public Competition(long compId, Date date, long locId, long meetId) {
+    public Competition(long compId, LocalDate date, long locId, long meetId) {
         this.compId = compId;
         this.date = date;
         this.locId = locId;
@@ -42,11 +42,11 @@ public class Competition {
     }
 
 
-    public java.sql.Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

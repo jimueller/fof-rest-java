@@ -1,5 +1,6 @@
 package com.jimueller.fof.jdbi.mapper;
 
+import com.jimueller.fof.api.Address;
 import com.jimueller.fof.api.Member;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
@@ -17,13 +18,13 @@ public class MemberMapper implements RowMapper<Member> {
                 r.getString("middle_initial"),
                 r.getDate("dob").toLocalDate(),
                 r.getString("gender"),
-                r.getString("street_addr"),
-                r.getString("city"),
-                r.getString("state"),
-                r.getString("zip_code"),
                 r.getDate("exp_date").toLocalDate(),
                 r.getInt("age_group_id"),
-                r.getInt("club_id")
+                r.getInt("club_id"),
+                new Address(r.getString("street_addr"),
+                        r.getString("city"),
+                        r.getString("state"),
+                        r.getString("zip_code"))
         );
     }
 }

@@ -2,6 +2,7 @@ package com.jimueller.fof.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.jimueller.fof.api.Club;
+import com.jimueller.fof.api.Meet;
 import com.jimueller.fof.api.Member;
 import com.jimueller.fof.jdbi.ClubDAO;
 
@@ -39,5 +40,12 @@ public class ClubResource {
     @Timed
     public List<Member> getClubMembers(@PathParam("id") int id){
         return dao.getClubMembers(id);
+    }
+
+    @Path("/{id}/meets")
+    @GET
+    @Timed
+    public  List<Meet> getClubMeets(@PathParam("id") int id){
+        return dao.getClubMeets(id);
     }
 }

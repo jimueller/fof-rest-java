@@ -1,9 +1,15 @@
 package com.jimueller.fof.jdbi;
 
 import com.jimueller.fof.api.Club;
+import com.jimueller.fof.api.Meet;
 import com.jimueller.fof.api.Member;
 import com.jimueller.fof.jdbi.mapper.ClubMapper;
 import com.jimueller.fof.jdbi.mapper.MemberMapper;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.mapper.RowMapperFactory;
+import org.jdbi.v3.core.mapper.reflect.BeanMapper;
+import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.config.RegisterRowMapperFactory;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
@@ -31,4 +37,7 @@ public interface ClubDAO {
     @UseRowMapper(MemberMapper.class)
     List<Member> getClubMembers(@Bind("id") int clubId);
 
+    @SqlQuery("SELECT * FROM meet WHERE club_id = :id")
+    @RegisterBeanMapper(Meet.class)
+    List<Meet> getClubMeets(@Bind("id") int clubId);
 }

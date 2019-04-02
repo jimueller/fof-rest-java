@@ -4,8 +4,10 @@ package com.jimueller.fof.api;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.jdbi.v3.core.mapper.Nested;
 
 import java.time.LocalDate;
+import java.util.StringJoiner;
 
 public class Member {
 
@@ -23,57 +25,45 @@ public class Member {
     @JsonProperty
     private String gender;
     @JsonProperty
-    private String streetAddr;
-    @JsonProperty
-    private String city;
-    @JsonProperty
-    private String state;
-    @JsonProperty
-    private String zipCode;
-    @JsonProperty
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate expDate;
     @JsonProperty
     private long ageGroupId;
     @JsonProperty
     private long clubId;
+    @Nested
+    private Address address;
 
     public Member() {
     }
 
     public Member(String lastName, String firstName, String middleInitial, LocalDate dob, String gender,
-                  String streetAddr, String city, String state, String zipCode, LocalDate expDate, long ageGroupId,
-                  long clubId) {
+                  LocalDate expDate, long ageGroupId,
+                  long clubId, Address address) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
         this.dob = dob;
         this.gender = gender;
-        this.streetAddr = streetAddr;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
         this.expDate = expDate;
         this.ageGroupId = ageGroupId;
         this.clubId = clubId;
+        this.address = address;
     }
 
     public Member(long memId, String lastName, String firstName, String middleInitial, LocalDate dob, String gender,
-                  String streetAddr, String city, String state, String zipCode, LocalDate expDate, long ageGroupId,
-                  long clubId) {
+                  LocalDate expDate, long ageGroupId,
+                  long clubId, Address address) {
         this.memId = memId;
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleInitial = middleInitial;
         this.dob = dob;
         this.gender = gender;
-        this.streetAddr = streetAddr;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
         this.expDate = expDate;
         this.ageGroupId = ageGroupId;
         this.clubId = clubId;
+        this.address = address;
     }
 
     public long getMemId() {
@@ -130,42 +120,6 @@ public class Member {
     }
 
 
-    public String getStreetAddr() {
-        return streetAddr;
-    }
-
-    public void setStreetAddr(String streetAddr) {
-        this.streetAddr = streetAddr;
-    }
-
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-
     public LocalDate getExpDate() {
         return expDate;
     }
@@ -192,23 +146,27 @@ public class Member {
         this.clubId = clubId;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("memId", memId)
-                .append("lastName", lastName)
-                .append("firstName", firstName)
-                .append("middleInitial", middleInitial)
-                .append("dob", dob)
-                .append("gender", gender)
-                .append("streetAddr", streetAddr)
-                .append("city", city)
-                .append("state", state)
-                .append("zipCode", zipCode)
-                .append("expDate", expDate)
-                .append("ageGroupId", ageGroupId)
-                .append("clubId", clubId)
+        return new StringJoiner(", ", Member.class.getSimpleName() + "[", "]")
+                .add("memId=" + memId)
+                .add("lastName='" + lastName + "'")
+                .add("firstName='" + firstName + "'")
+                .add("middleInitial='" + middleInitial + "'")
+                .add("dob=" + dob)
+                .add("gender='" + gender + "'")
+                .add("expDate=" + expDate)
+                .add("ageGroupId=" + ageGroupId)
+                .add("clubId=" + clubId)
+                .add("address=" + address)
                 .toString();
     }
 }

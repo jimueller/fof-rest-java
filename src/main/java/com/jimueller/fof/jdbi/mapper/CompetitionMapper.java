@@ -11,7 +11,7 @@ public class CompetitionMapper implements RowMapper<Competition> {
     public Competition map(ResultSet r, StatementContext statementContext) throws SQLException {
         return new Competition(
                 r.getInt("comp_id"),
-                r.getDate("date"),
+                r.getDate("date").toLocalDate(),
                 r.getInt("loc_id"),
                 r.getInt("meet_id")
         );
