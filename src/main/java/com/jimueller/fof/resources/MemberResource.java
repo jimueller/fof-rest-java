@@ -2,6 +2,8 @@ package com.jimueller.fof.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.jimueller.fof.api.Member;
+import com.jimueller.fof.core.AddressValidator;
+import com.jimueller.fof.core.SmStreetsAddressValidator;
 import com.jimueller.fof.jdbi.MemberDAO;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +23,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class MemberResource {
     private MemberDAO memberDAO;
+    private AddressValidator addressValidator = new SmStreetsAddressValidator();
 
     public MemberResource(MemberDAO dao){
         this.memberDAO = dao;
@@ -56,6 +59,8 @@ public class MemberResource {
     @GET
     @Timed
     public Member getMemberById(@PathParam("id") int id){
-        return memberDAO.getMemberById(id);
+        Member member = getMemberById(id);
+        member.setAddress(addressValidator.validate(member.getAddress()));
+        return member;
     }
 }

@@ -17,6 +17,7 @@
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
         <replacer.version>1.5.3</replacer.version>
+        <smartystreets.version>3.3.7</smartystreets.version>
     </properties>
 
     <dependencies>
@@ -54,6 +55,12 @@
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-jaxrs2-servlet-initializer</artifactId>
             <version>${swaggercore.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.smartystreets.api</groupId>
+            <artifactId>smartystreets-java-sdk</artifactId>
+            <version>${smartystreets.version}</version>
         </dependency>
     </dependencies>
 
