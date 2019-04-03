@@ -5,10 +5,10 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-GET localhost:8080/clubs
+GET {{host}}/clubs
 
 ###
 
-GET localhost:8080/clubs/1003/meets
+GET {{host}}/clubs/1003/meets
 
 ###
