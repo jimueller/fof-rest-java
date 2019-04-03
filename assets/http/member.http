@@ -5,6 +5,32 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
 
-GET localhost:8080/members
+GET {{host}}/members
+
+###
+
+GET {{host}}/members/10014
+
+###
+
+POST {{host}}/members
+Content-Type: application/json
+
+{
+  "lastName": "Mueller",
+  "firstName": "James",
+  "middleInitial": "I",
+  "dob": "1973-09-02",
+  "gender": "M",
+  "expDate": "2011-01-01",
+  "ageGroupId": 7,
+  "clubId": 1003,
+  "address": {
+    "street": "510 W Rose St",
+    "city": "Walla Walla",
+    "state": "WA",
+    "zip5": "99362"
+  }
+}
 
 ###

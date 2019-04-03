@@ -2,6 +2,7 @@ package com.jimueller.fof.api;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.jdbi.v3.core.mapper.Nested;
@@ -9,6 +10,7 @@ import org.jdbi.v3.core.mapper.Nested;
 import java.time.LocalDate;
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Member {
 
     @JsonProperty

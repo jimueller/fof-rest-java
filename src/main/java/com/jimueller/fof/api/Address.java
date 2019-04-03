@@ -1,14 +1,21 @@
 package com.jimueller.fof.api;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.StringJoiner;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Address {
     String street;
     String city;
     String state;
     String zip5;
     String zip4;
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     Boolean valid;
+
+    public Address() {
+    }
 
     public Address(String street, String city, String state, String zip5) {
         this.street = street;
@@ -34,7 +41,7 @@ public class Address {
         this.valid = valid;
     }
 
-    public Address(Address address){
+    public Address(Address address) {
         this.street = address.street;
         this.city = address.city;
         this.state = address.state;

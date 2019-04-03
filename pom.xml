@@ -61,6 +61,13 @@
             <groupId>com.smartystreets.api</groupId>
             <artifactId>smartystreets-java-sdk</artifactId>
             <version>${smartystreets.version}</version>
+            <exclusions>
+                <!-- Has old version of jackson conflicting with dropwizard -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

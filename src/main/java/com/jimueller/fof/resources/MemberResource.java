@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.jimueller.fof.api.Member;
 import com.jimueller.fof.core.AddressValidator;
 import com.jimueller.fof.core.SmStreetsAddressValidator;
+import com.jimueller.fof.core.controllers.MemberController;
 import com.jimueller.fof.jdbi.MemberDAO;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,15 +53,14 @@ public class MemberResource {
     @POST
     @Timed
     public Member addMember(@NotNull @Valid Member member){
-        return member;
+        MemberController memberController = new MemberController(memberDAO, addressValidator);
+        return memberController.addMember(member);
     }
 
     @Path("/{id}")
     @GET
     @Timed
     public Member getMemberById(@PathParam("id") int id){
-        Member member = getMemberById(id);
-        member.setAddress(addressValidator.validate(member.getAddress()));
-        return member;
+        return memberDAO.getMemberById(id);
     }
 }

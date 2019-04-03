@@ -25,10 +25,10 @@ public interface MemberDAO {
     // Inserts
     @SqlUpdate("INSERT INTO member (last_name, first_name, middle_initial, dob, gender, street_addr, city, state, " +
             "zip_code, exp_date, age_group_id, club_id) " +
-            "VALUES (:lastName, :firstName, :middleInitial, :dob, :gender, :streetAddr, :city, :state, :zipCode " +
+            "VALUES (:lastName, :firstName, :middleInitial, :dob, :gender, :address.street, :address.city, :address.state, :address.zip5, " +
             ":expDate, :ageGroupId, :clubId)")
     @UseRowMapper(MemberMapper.class)
     @GetGeneratedKeys
-    int addMember(@BindBean Member member);
+    Member addMember(@BindBean Member member);
 
 }

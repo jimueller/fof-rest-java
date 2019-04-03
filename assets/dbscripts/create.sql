@@ -1,3 +1,6 @@
+ALTER DEFAULT PRIVILEGES IN SCHEMA fof_user
+  GRANT USAGE, SELECT ON SEQUENCES TO fof_user;
+
 CREATE SEQUENCE member_mem_id_seq START 10000;
 CREATE SEQUENCE age_group_age_group_id_seq;
 CREATE SEQUENCE course_course_id_seq;
@@ -5,6 +8,7 @@ CREATE SEQUENCE competition_comp_id_seq;
 CREATE SEQUENCE meet_meet_id_seq;
 CREATE SEQUENCE club_club_id_seq START 1000;
 CREATE SEQUENCE location_loc_id_seq;
+-- GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA fof_user TO fof_user;
 
 CREATE TABLE IF NOT EXISTS club
 (
