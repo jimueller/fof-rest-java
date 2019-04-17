@@ -12,3 +12,27 @@ GET {{host}}/clubs
 GET {{host}}/clubs/1003/meets
 
 ###
+
+POST {{host}}/clubs
+Content-Type: application/json
+
+{
+  "name": "Minneapolis Loons",
+  "abbreviation": "MNLN"
+}
+
+###
+
+PUT {{host}}/clubs/2000
+Content-Type: application/json
+
+{
+  "name": "Minneapolis Loons",
+  "abbreviation": "MNLN"
+}
+
+###
+
+DELETE {{host}}/clubs/abbvreviation/mnln
+
+###

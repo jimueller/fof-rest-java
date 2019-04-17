@@ -3,14 +3,21 @@ package com.jimueller.fof.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Meet {
 
     @JsonProperty
     private long meetId;
+
     @JsonProperty
+    @NotEmpty
     private String name;
+
     @JsonProperty
+    @NotEmpty(message = "A meet must be hosted by a club")
+    @ColumnName("club_id")
     private long clubId;
 
     public Meet() {

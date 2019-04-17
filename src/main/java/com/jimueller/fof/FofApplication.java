@@ -55,7 +55,6 @@ public class FofApplication extends Application<FofApplicationConfiguration> {
         final MeetDAO meetDAO = jdbi.onDemand(MeetDAO.class);
 
         // Resources
-
         final ClubResource clubResource = new ClubResource(clubDAO);
         environment.jersey().register(clubResource);
 

@@ -16,8 +16,8 @@ public class MemberController {
 
     public Member addMember(Member member){
         // validate address
-        //Address validatedAddress = addressValidator.validate(member.getAddress());
-        //member.setAddress(validatedAddress);
+        Address validatedAddress = addressValidator.validate(member.getAddress());
+        member.setAddress(validatedAddress);
         return memberDAO.addMember(member);
     }
 }

@@ -12,6 +12,7 @@ import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapperFactory;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
@@ -19,25 +20,39 @@ import org.jdbi.v3.sqlobject.statement.UseRowMapper;
 import java.util.List;
 
 public interface ClubDAO {
-    @SqlUpdate("INSERT INTO club VALUES (?, ?, ?")
-    void insert(int id, String name, String abbreviation);
+    @SqlUpdate("INSERT INTO club(name, abbv) VALUES (:name, :abbreviation)")
+    @RegisterBeanMapper(Club.class)
+    @GetGeneratedKeys("club_id")
+    long insert(@BindBean Club club);
 
-    @SqlUpdate("INSERT INTO club(id, name, abbreviation VALUES (:id, :name, :abbreviation)")
-    void insert(@BindBean Club club);
+    @SqlUpdate("INSERT INTO club(club_id, name, abbv) VALUES (:id, :name, :abbreviation) ON CONFLICT club_id " +
+            "DO UPDATE SET name = :name, abbv = :abbreviation WHERE club_id = :id")
+    @RegisterBeanMapper(Club.class)
+    @GetGeneratedKeys("club_id")
+    long upsert(@BindBean Club club);
+
+    @SqlUpdate("DELETE FROM club WHERE club_id = :id")
+    void delete(@Bind("id") long clubId);
+
+    @SqlUpdate("DELETE FROM club WHERE abbv = :abbv")
+    void delete(@Bind("abbv") String abbreviation);
 
     @SqlQuery("SELECT * FROM club ORDER BY name")
     @UseRowMapper(ClubMapper.class)
     List<Club> listClubs();
 
-    @SqlQuery("SELECT * FROM club WHERE name = :id")
+    @SqlQuery("SELECT * FROM club WHERE club_id = :id")
     @UseRowMapper(ClubMapper.class)
-    Club getClubById(int id);
+    Club getClubById(@Bind("id") long id);
+
+    @SqlQuery("SELECT COUNT(club_id) FROM club WHERE UPPER(abbv) = UPPER(:abbv)")
+    long getAbbvCount(@Bind("abbv") String abbv);
 
     @SqlQuery("SELECT * FROM member WHERE club_id = :id")
     @UseRowMapper(MemberMapper.class)
-    List<Member> getClubMembers(@Bind("id") int clubId);
+    List<Member> getClubMembers(@Bind("id") long clubId);
 
     @SqlQuery("SELECT * FROM meet WHERE club_id = :id")
     @RegisterBeanMapper(Meet.class)
-    List<Meet> getClubMeets(@Bind("id") int clubId);
+    List<Meet> getClubMeets(@Bind("id") long clubId);
 }
