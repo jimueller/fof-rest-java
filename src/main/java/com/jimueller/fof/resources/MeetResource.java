@@ -3,6 +3,7 @@ package com.jimueller.fof.resources;
 import com.codahale.metrics.annotation.Timed;
 import com.jimueller.fof.api.Meet;
 import com.jimueller.fof.jdbi.MeetDAO;
+import io.dropwizard.jersey.PATCH;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -41,7 +42,7 @@ public class MeetResource {
     @PUT
     @Timed
     @Path("/id/{id}")
-    public Meet updateMeet(@PathParam("id") long id, Meet updatedMeet) throws WebApplicationException {
+    public Meet replaceMeet(@PathParam("id") long id, Meet updatedMeet) throws WebApplicationException {
         if (updatedMeet.getMeetId() != 0 && updatedMeet.getMeetId() != id) {
             throw new WebApplicationException("If meet.meetId is provided, it must match /id/ in path", 400);
         }

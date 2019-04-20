@@ -3,8 +3,10 @@ package com.jimueller.fof.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Runs {
 
@@ -13,16 +15,16 @@ public class Runs {
     @JsonProperty
     private long courseId;
     @JsonProperty
-    private java.sql.Timestamp startTime;
+    private LocalDateTime startTime;
     @JsonProperty
-    private java.sql.Timestamp finishTime;
+    private LocalDateTime finishTime;
     @JsonProperty
     private String explanatoryCode;
 
     public Runs() {
     }
 
-    public Runs(long memId, long courseId, Timestamp startTime, Timestamp finishTime, String explanatoryCode) {
+    public Runs(long memId, long courseId, LocalDateTime startTime, LocalDateTime finishTime, String explanatoryCode) {
         this.memId = memId;
         this.courseId = courseId;
         this.startTime = startTime;
@@ -48,20 +50,20 @@ public class Runs {
     }
 
 
-    public java.sql.Timestamp getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(java.sql.Timestamp startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
 
-    public java.sql.Timestamp getFinishTime() {
+    public LocalDateTime getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(java.sql.Timestamp finishTime) {
+    public void setFinishTime(LocalDateTime finishTime) {
         this.finishTime = finishTime;
     }
 
@@ -76,7 +78,7 @@ public class Runs {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
                 .append("memId", memId)
                 .append("courseId", courseId)
                 .append("startTime", startTime)

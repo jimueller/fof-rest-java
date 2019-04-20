@@ -1,15 +1,24 @@
 package com.jimueller.fof.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.hibernate.validator.constraints.Length;
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 import java.util.StringJoiner;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Address {
+    @Length(max = 100)
     String street;
+    @Length(max = 100)
     String city;
+    @Length(min = 2, max = 2)
     String state;
+    @ColumnName("postal_code")
+    @Length(min = 5, max = 5)
     String zip5;
+    @ColumnName("postal_code_ext")
+    @Length(min = 4, max = 4)
     String zip4;
     @JsonInclude(JsonInclude.Include.ALWAYS)
     Boolean valid;

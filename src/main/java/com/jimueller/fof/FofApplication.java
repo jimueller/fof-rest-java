@@ -1,9 +1,11 @@
 package com.jimueller.fof;
 
 import com.jimueller.fof.jdbi.ClubDAO;
+import com.jimueller.fof.jdbi.LocationDAO;
 import com.jimueller.fof.jdbi.MeetDAO;
 import com.jimueller.fof.jdbi.MemberDAO;
 import com.jimueller.fof.resources.ClubResource;
+import com.jimueller.fof.resources.LocationResource;
 import com.jimueller.fof.resources.MeetResource;
 import com.jimueller.fof.resources.MemberResource;
 import io.dropwizard.Application;
@@ -53,8 +55,12 @@ public class FofApplication extends Application<FofApplicationConfiguration> {
         final ClubDAO clubDAO = jdbi.onDemand(ClubDAO.class);
         final MemberDAO memberDAO = jdbi.onDemand(MemberDAO.class);
         final MeetDAO meetDAO = jdbi.onDemand(MeetDAO.class);
+        final LocationDAO locationDAO = jdbi.onDemand(LocationDAO.class);
 
         // Resources
+        final LocationResource locationResource = new LocationResource(locationDAO);
+        environment.jersey().register(locationResource);
+
         final ClubResource clubResource = new ClubResource(clubDAO);
         environment.jersey().register(clubResource);
 

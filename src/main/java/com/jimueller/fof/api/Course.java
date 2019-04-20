@@ -17,6 +17,7 @@ public class Course {
     @JsonProperty
     private long compId;
 
+
     public Course() {
     }
 
