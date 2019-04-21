@@ -25,8 +25,11 @@ public interface ClubDAO {
     @GetGeneratedKeys("club_id")
     long insert(@BindBean Club club);
 
-    @SqlUpdate("INSERT INTO club(club_id, name, abbv) VALUES (:id, :name, :abbreviation) ON CONFLICT club_id " +
-            "DO UPDATE SET name = :name, abbv = :abbreviation WHERE club_id = :id")
+    @SqlUpdate(
+            "INSERT INTO club(club_id, name, abbv) " +
+            "VALUES (:id, :name, :abbreviation) " +
+            "ON CONFLICT (club_id) " +
+            "DO UPDATE SET name = :name, abbv = :abbreviation")
     @RegisterBeanMapper(Club.class)
     @GetGeneratedKeys("club_id")
     long upsert(@BindBean Club club);
