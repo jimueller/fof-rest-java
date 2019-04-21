@@ -13,6 +13,7 @@
         <postgres.version>9.4.1212</postgres.version>
         <swaggercore.version>2.0.0</swaggercore.version>
         <swaggerui.version>3.17.0</swaggerui.version>
+        <jmeterpluglin.version>2.9.0</jmeterpluglin.version>
         <!-- Build Plugins -->
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
@@ -183,7 +184,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swaggerui.version}/index.html</file>
+                    <file>
+                        ${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swaggerui.version}/index.html
+                    </file>
                     <replacements>
                         <replacement>
                             <token>http://petstore.swagger.io/v2/swagger.json</token>
@@ -207,7 +210,9 @@
                             <!--<outputDirectory>${basedir}/src/main/resources/swagger-ui</outputDirectory>-->
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swaggerui.version}</directory>
+                                    <directory>
+                                        ${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swaggerui.version}
+                                    </directory>
                                 </resource>
                             </resources>
                             <outputDirectory>${project.build.directory}/classes/swagger-ui</outputDirectory>
@@ -215,6 +220,21 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.lazerycode.jmeter</groupId>
+                <artifactId>jmeter-maven-plugin</artifactId>
+                <version>${jmeterpluglin.version}</version>
+                <executions>
+                    <execution>
+                        <id>jmeter-tests</id>
+                        <goals>
+                            <goal>jmeter</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>
