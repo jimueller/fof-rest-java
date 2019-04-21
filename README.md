@@ -12,7 +12,7 @@ Dropwizard restful service demo project
 
 1. Clone project
 1. Create Postgres (9.5+) database using included scripts
-1. Configure Environmet Variables
+1. Configure Environment Variables
 
 | Name          | Description                |
 | ------------- | -------------------------- |
