@@ -32,7 +32,7 @@ public class ClubResource {
 
     @POST
     @Timed
-    public Club addClub(@NotNull @Valid Club club){
+    public Response addClub(@NotNull @Valid Club club){
         // Validate abbv doesn't exist
         long existing = dao.getAbbvCount(club.getAbbreviation());
         if(existing > 0){
@@ -40,7 +40,10 @@ public class ClubResource {
         }
 
         long newClubId = dao.insert(club);
-        return dao.getClubById(newClubId);
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(dao.getClubById(newClubId))
+                .build();
     }
 
     @Path("/{id}")
